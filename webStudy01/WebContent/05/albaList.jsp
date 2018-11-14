@@ -24,8 +24,9 @@
 	</thead>
 	<tbody>
 		<%	
+		
 			//누군가 넣은 코드,
-			Map<String,AlbasengVO> list= getServletConfig().getInitParameter("name");
+			Map<String,AlbasengVO> list= (Map<String , AlbasengVO>)application.getAttribute("albasengs");
 			String pattern ="<td>%s</td>";
 			for(Entry<String,AlbasengVO> entry: list.entrySet()){
 			out.print("<tr>");
