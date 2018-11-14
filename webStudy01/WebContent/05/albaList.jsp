@@ -23,8 +23,9 @@
 		</tr>
 	</thead>
 	<tbody>
-		<%
-			Map<String,AlbasengVO> list= SimpleFormProcessServlet.albasengs;
+		<%	
+			//누군가 넣은 코드,
+			Map<String,AlbasengVO> list= getServletConfig().getInitParameter("name");
 			String pattern ="<td>%s</td>";
 			for(Entry<String,AlbasengVO> entry: list.entrySet()){
 			out.print("<tr>");

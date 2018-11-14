@@ -83,6 +83,7 @@ public class SimpleFormProcessServlet extends HttpServlet {
 			albasengVO.setCode(String.format("alba_%03d",albasengs.size()+1));
 			albasengs.put(albasengVO.getCode(), albasengVO );
 			
+			
 			resp.sendRedirect(req.getContextPath()+"/05/albaList.jsp");
 			
 		}
