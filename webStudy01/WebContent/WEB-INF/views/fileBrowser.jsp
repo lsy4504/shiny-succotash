@@ -31,7 +31,6 @@
 
 	<jsp:useBean id="file" class="java.util.ArrayList" scope="request" />
 	<ul id="fileList">
-
 		<%
 		
 			String pattern = "<li value=%s >%s</li>";
