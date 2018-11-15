@@ -8,11 +8,9 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<link href="<%=request.getContextPath() %>/css/Calendar.css" rel="stylesheet" type="text/css">
-	<link href="<%=request.getContextPath() %>/css/select.css" rel="stylesheet" type="text/css">
+
+<%-- 	<link href="<%=request.getContextPath() %>/css/Calendar.css" rel="stylesheet" type="text/css"> --%>
+<%-- 	<link href="<%=request.getContextPath() %>/css/select.css" rel="stylesheet" type="text/css"> --%>
 
 <script type="text/javascript">
 	function langChange() {
@@ -64,16 +62,12 @@
 		System.out.print(lang);
 	}
 %>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 	<%
 		Locale[] locales = Locale.getAvailableLocales();
 		Locale[] locales2 = calendar.getAvailableLocales();
 	%>
 	<form action="" name="formName">
-
+	
 		<select name="lang" onchange="langChange()">
 			<option value="">언어선택</option>
 			<%
@@ -168,5 +162,3 @@
 			}
 		%>
 	</table>
-</body>
-</html>

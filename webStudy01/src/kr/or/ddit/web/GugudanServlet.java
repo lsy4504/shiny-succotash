@@ -45,9 +45,10 @@ public class GugudanServlet extends HttpServlet{
 		int end =start + "@gugudan".length();
 		String replace= tag.toString();
 		html.replace(start,end,replace);
+		
 		PrintWriter out=resp.getWriter();
 		out.println(html.toString());
-		out.close();
+//		out.close();
 	}
 	
 }

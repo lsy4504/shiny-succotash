@@ -30,7 +30,7 @@ request.setCharacterEncoding("UTF-8");
 		
 // 	}
 	if(mem_id==null || mem_id.trim().length()==0 || mem_pass==null||mem_pass.trim().length()==0){
-		goPage="/login/loginForm.jsp";
+		goPage="/?commend=login";
 		redirect =true;
 		session.setAttribute("message", "아이디나 비밀번호가 누락됨 ㅎ");
 	}else{
@@ -39,7 +39,7 @@ request.setCharacterEncoding("UTF-8");
 			redirect=true;
 			session.setAttribute("id", mem_id);
 		}else{
-		goPage="/login/loginForm.jsp";
+		goPage="/?commend=login";
 		redirect =true;
 		session.setAttribute("message", "아이디 비밀번호가 노일치!");
 		

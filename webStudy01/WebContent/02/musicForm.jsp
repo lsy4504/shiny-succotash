@@ -12,17 +12,9 @@
 		return false;
 	});
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<meta charset="UTF-8">
+
+
+
 <script type="text/javascript">
 	$(function() {
 		var songForm = $("#songForm");
@@ -48,10 +40,9 @@
 		});
 	});
 </script>
-<title>Insert title here</title>
-</head>
-<body>
-	<form id="songForm" action="<%=request.getContextPath()%>/song"
+
+
+	<form id="songForm" action="<%=request.getContextPath()%>/song2"
 		method="post">
 		<select name="music">
 			<option value="">가사 선택</option>
@@ -64,5 +55,3 @@
 		</select>
 	</form>
 	<div id="resultArea"></div>
-</body>
-</html>

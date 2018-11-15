@@ -10,14 +10,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%
-	Map<String,String> gradeMap=(Map<String,String>)application.getAttribute("gradeMap");
-	Map<String,String> licenseMap=(Map<String,String>)application.getAttribute("licenseMap");
-	AlbasengVO albaVO=(AlbasengVO)request.getAttribute("albaVO");
-	Map<String, String> erros=(Map<String,String>)request.getAttribute("errors");
-	if(albaVO==null) albaVO=new AlbasengVO();
-	if(erros==null) erros=new LinkedHashMap<String,String>();
-%>
+<%--
+// 	Map<String,String> gradeMap=(Map<String,String>)application.getAttribute("gradeMap");
+// 	Map<String,String> licenseMap=(Map<String,String>)application.getAttribute("licenseMap");
+// 	AlbasengVO albaVO=(AlbasengVO)request.getAttribute("albaVO");
+// 	Map<String, String> erros=(Map<String,String>)request.getAttribute("errors");
+// 	if(albaVO==null) albaVO=new AlbasengVO();
+// 	if(erros==null) erros=new LinkedHashMap<String,String>();
+--%>
+<jsp:useBean id="licenseMap" class="java.util.LinkedHashMap" scope="application"/>
+<jsp:useBean id="gradeMap" class="java.util.HashMap" scope="application"/>
+<jsp:useBean id="albaVO" class="kr.or.ddit.vo.AlbasengVO" scope="request"/>
+<jsp:useBean id="erros" class="java.util.LinkedHashMap" scope="request"/>
 <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -87,8 +91,9 @@
 				<% 
 					
 					String partten="<option value=%s %s>%s</option>";
-					for(Entry<String,String> e : gradeMap.entrySet()){
-						String key= e.getKey();	
+					for(Object obj : gradeMap.entrySet()){
+						Entry e= (Entry)obj;
+						String key= e.getKey().toString();	
 						String sel="";
 						if(key.equals(albaVO.getGrade())){
 							sel="selected";
@@ -119,7 +124,8 @@
 					Arrays.sort(l);
 					System.out.println(Arrays.toString(l));
 				}
-				for(Entry<String,String> e : licenseMap.entrySet()){
+				for(Object obj : licenseMap.entrySet()){
+					Entry e= (Entry)obj;
 					String sel="";
 					if(l!=null&&Arrays.binarySearch(l, e.getKey())>-1){
 						sel="selected";

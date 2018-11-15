@@ -29,7 +29,7 @@
 </style>
 <script type="text/javascript">
 	function eventHandler(year,month) {
-		var form=document.forms[0];
+		var form=document.calForm;
 		if((year && month)||month==0){//스크립트에서 널이나 공백일경우 false 값이 있으면 true
 		form.year.value=year;
 		form.month.value=month;
@@ -75,7 +75,8 @@
 	int nextMonth=cal.get(MONTH);//다음달
 	Locale[] locales= Locale.getAvailableLocales();
 %>
-<form action="">
+<form action="" name="calForm" method="">
+<input type="hidden" name="commend" value="calender"> 
 <h4>
 <a href="javascript:eventHandler(<%=beforYear%>,<%=beforMonth%>);">이전달</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
