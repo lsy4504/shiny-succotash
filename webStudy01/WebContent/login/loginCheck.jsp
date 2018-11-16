@@ -1,3 +1,6 @@
+<%@page import="kr.or.ddit.utils.CookieUtil.TextType"%>
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@page import="kr.or.ddit.utils.CookieUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 		
@@ -13,6 +16,8 @@ request.setCharacterEncoding("UTF-8");
 		1)-2 인증 실패 : 이동(loginForm.jsp,기존에 입력했던 아이디를 그대로 전달 할수 있는 방식. ) */
 	String mem_id=request.getParameter("mem_id");
 	String mem_pass=request.getParameter("mem_pass");
+	String idChecked=request.getParameter("idChecked");
+	
 	RequestDispatcher rd= null;
 	String goPage= null;
 	boolean redirect=false;
@@ -38,6 +43,13 @@ request.setCharacterEncoding("UTF-8");
 			goPage="/";
 			redirect=true;
 			session.setAttribute("id", mem_id);
+			Cookie cookie=null;
+			if(StringUtils.isNotBlank(idChecked)){
+				cookie = CookieUtil.createCookie("id",mem_id,request.getContextPath(),TextType.PATH,60*60*24*7);
+			}else{
+				cookie = CookieUtil.createCookie("id",mem_id,request.getContextPath(),TextType.PATH,0);
+			}
+				response.addCookie(cookie);
 		}else{
 		goPage="/?commend=login";
 		redirect =true;

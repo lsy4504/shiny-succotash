@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.utils.CookieUtil"%>
 <%@page import="kr.or.ddit.web.modulize.ServiceType"%>
 <%@page import="kr.or.ddit.web.Service"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
@@ -28,7 +29,7 @@
 // 	}
 	
 	//서비스 제공 못하면 낫파운드~
-	
+	new CookieUtil(request).getCookie(request.getParameter("img"));
 	
 %>
 <meta charset="UTF-8">
