@@ -1,9 +1,23 @@
+<%@page import="kr.or.ddit.service.AuthenticateServiceImpl.ServiceResult"%>
+<%@page import="kr.or.ddit.vo.MemberVO"%>
+<%@page import="kr.or.ddit.service.AuthenticateServiceImpl"%>
+<%@page import="sun.net.www.protocol.http.AuthCacheImpl"%>
+<%@page import="kr.or.ddit.service.IAuthenticateService"%>
+<%@page import="java.sql.ResultSetMetaData"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="kr.or.ddit.db.ConnetionFactory"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="kr.or.ddit.utils.CookieUtil.TextType"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="kr.or.ddit.utils.CookieUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-		
+ 
+<%!
+	
+	%>
 <%
 request.setCharacterEncoding("UTF-8");
 /* 1.파라미터 확인
@@ -39,22 +53,29 @@ request.setCharacterEncoding("UTF-8");
 		redirect =true;
 		session.setAttribute("message", "아이디나 비밀번호가 누락됨 ㅎ");
 	}else{
-		if(mem_id.equals(mem_pass)){
+		IAuthenticateService service = new AuthenticateServiceImpl();
+		Object result=service.authenticate(new MemberVO(mem_id,mem_pass));
+		if(result instanceof MemberVO){
 			goPage="/";
 			redirect=true;
-			session.setAttribute("id", mem_id);
+			session.setAttribute("authMember", result);
 			Cookie cookie=null;
+			int maxAge=0;
 			if(StringUtils.isNotBlank(idChecked)){
-				cookie = CookieUtil.createCookie("id",mem_id,request.getContextPath(),TextType.PATH,60*60*24*7);
-			}else{
-				cookie = CookieUtil.createCookie("id",mem_id,request.getContextPath(),TextType.PATH,0);
+				maxAge=60*60*24*7;
 			}
+				cookie = CookieUtil.createCookie("id",mem_id,request.getContextPath(),TextType.PATH,maxAge);
+			
 				response.addCookie(cookie);
+		}else if(result == ServiceResult.PKNOTFOUND){
+		goPage="/?commend=login";
+		redirect =true;
+		session.setAttribute("message", "노존재!");
 		}else{
 		goPage="/?commend=login";
 		redirect =true;
-		session.setAttribute("message", "아이디 비밀번호가 노일치!");
-		
+		session.setAttribute("message", "비번 다름");
+			
 		}
 	}
 	if(redirect){

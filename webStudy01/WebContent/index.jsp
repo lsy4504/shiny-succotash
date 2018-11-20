@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.vo.MemberVO"%>
 <%@page import="kr.or.ddit.utils.CookieUtil"%>
 <%@page import="kr.or.ddit.web.modulize.ServiceType"%>
 <%@page import="kr.or.ddit.web.Service"%>
@@ -8,7 +9,7 @@
 <html>
 <head>
 <%
-	String mem_id = (String) session.getAttribute("id");
+	MemberVO authMember = (MemberVO) session.getAttribute("authMember");
 	String commend=request.getParameter("commend");
 	int statusCode=0;
 	String includePage=null;
@@ -70,8 +71,8 @@ function goLog(commend) {
 	처음부터 웰컴 페이지로 접속하거나,
 	로그인에 성공해서 웰컴 페이지로 접속하는 경우의 수가 있음.
 	<% 
-			if (StringUtils.isNotBlank(mem_id)) {
-				out.println(mem_id + "님 환영합니다");
+			if (authMember!=null) {
+				out.println(authMember.getMem_name() + "님 환영합니다");
 				out.print(String.format("<a href='%s'>로그아웃</a>", request.getContextPath() + "/login/logout.jsp"));
 			} else {
 				out.print(

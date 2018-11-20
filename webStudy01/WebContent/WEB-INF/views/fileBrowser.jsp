@@ -14,35 +14,42 @@
 	$(function() {
 	    var fileForm = document.fileForm;
 		$("#fileList>li").on("dblclick", function() {
-			alert($(this).text());
+			alert($(this).attr('value'));
 			fileForm.path.value=$(this).attr('value');
 			fileForm.name.value=$(this).text();
 			fileForm.submit();
 
 		});
+// 		$("#fileList>li").on("drag", function() {
+// 			alert($(this).attr('value'));
+// 		});
+// 		$("#fileList>li").on("dropenter", function() {
+// 			alert($(this).attr('value'));
+// 		});
 	})
-	function name() {
-		
-	}
+	
 </script>
 <title>Insert title here</title>
-</head>
-<body>
+</head >
 
 	<jsp:useBean id="file" class="java.util.ArrayList" scope="request" />
-	<ul id="fileList">
+	<ul id="fileList" ondr>
 		<%
-		
-			String pattern = "<li value=%s >%s</li>";
+// 			String delCheck="<input type='checkbox' name='del' value='%s'/>";
+			String pattern = "<li value=%s >%s  </li>";
 			for (Object name : file) {
 				File ss = (File) name;
-				out.println(String.format(pattern, ss.getAbsolutePath(), ss.getName()));
+// 				out.print(String.format(delCheck, ss.getAbsolutePath()));
+				out.print(String.format(pattern, ss.getAbsolutePath(), ss.getName()));
 			}
 		%>
 	</ul>
 	<form method="get" name="fileForm" >
 	<input name="path" value="" type="hidden" />
 	<input name="name" value="" type="hidden" />
+	<input type="radio" name="option" value="move">이동
+	<input name="option"  value="del" type="radio">삭제
+	<input name="option"  value="copy" type="radio">복사
 	</form>
 </body>
 </html>
